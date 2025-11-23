@@ -20,8 +20,8 @@ public class PanelBotones extends JPanel implements ActionListener
      */
     private static final String VER = "ver";
 
-    private JButton butNuevo;
-    private JButton butVerTodos;
+    private JButton botonNuevo;
+    private JButton botonVerTodos;
     private VentanaPrincipal ventanaPrincipal;
 
     public PanelBotones( VentanaPrincipal ventanaPrincipal )
@@ -32,9 +32,17 @@ public class PanelBotones extends JPanel implements ActionListener
 
         // Agrega el botón para crear un nuevo restaurante
         // TODO completar
+        botonNuevo = new JButton("Nuevo");
+        botonNuevo.setActionCommand(NUEVO);
+        botonNuevo.addActionListener(this);
+        add(botonNuevo);
 
         // Agrega el botón para ver todos los restaurantes
         // TODO completar
+        botonVerTodos = new JButton("Ver Todos");
+        botonVerTodos.setActionCommand(VER);
+        botonVerTodos.addActionListener(this);
+        add(botonVerTodos);
     }
 
     @Override

@@ -37,9 +37,21 @@ public class VentanaAgregarRestaurante extends JFrame
 
         // Agrega el panel donde va a estar el mapa
         // TODO completar
+        panelMapa = new PanelMapaAgregar();
+        add(panelMapa, BorderLayout.CENTER);
 
         // Agrega en el sur un panel para los detalles del restaurante y para los botones
         // TODO completar
+        JPanel panelSur = new JPanel();
+        panelSur.setLayout(new BorderLayout());
+
+        panelDetalles = new PanelEditarRestaurante();
+        panelBotones = new PanelBotonesAgregar(this);
+
+        panelSur.add(panelDetalles, BorderLayout.CENTER);
+        panelSur.add(panelBotones, BorderLayout.SOUTH);
+
+        add(panelSur, BorderLayout.SOUTH);
 
         // Termina de configurar la ventana
         pack( );
@@ -50,10 +62,28 @@ public class VentanaAgregarRestaurante extends JFrame
 
     /**
      * Le pide al panelDetalles los datos del nuevo restaurante y se los envía a la ventana principal para que cree el nuevo restaurante, y luego cierra la ventana.
-     */
+     */    
     public void agregarRestaurante( )
     {
-        // TODO completar
+    	// TODO completar
+        String nombre = panelDetalles.getNombre();
+        int calificacion = panelDetalles.getCalificacion();
+        boolean visitado = panelDetalles.getVisitado();
+        int[] coordenadas = panelMapa.getCoordenadas();
+        
+        if (nombre == null || nombre.trim().isEmpty()) 
+        {
+            javax.swing.JOptionPane.showMessageDialog(this,"El restaurante debe tener un nombre.","Nombre inválido",javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (coordenadas == null || (coordenadas[0] == 0 && coordenadas[1] == 0)) 
+        {
+            javax.swing.JOptionPane.showMessageDialog(this,"Se debe seleccionar una ubicación en el mapa.","Ubicación no seleccionada",javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        ventanaPrincipal.agregarRestaurante(nombre, calificacion, coordenadas[0], coordenadas[1], visitado);
+        
+        dispose();
     }
 
     /**
